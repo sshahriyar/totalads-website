@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Total Anomaly Detection | Features</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Host based anomaly detection using software execution traces">
+        <meta name="keywords" content="anomaly detection, malware detection, performance failures, crash reports, system call traces,  
+              wp7 crash report analysis, log analysis">
+        <meta name="author" content="Syed Shariyar Murtaza">
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="css/glyphicons.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+        <link href="css/base.css" rel="stylesheet">
+        <link href="css/blue.css" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="ico/favicon.png">
+        <script src="js/google-ga-analytics.js"></script>
+
+    </head>  
+
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-primary btn-dropnav" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>		
+                    <a class="brand" href="/">TotalADS</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right animated">
+                            <li>  <a href="index.html" tabindex="-1">Home</a></li>
+                            <li class="active"><a  href="features.html">Features</a></li>
+                            <li><a href="usecase.html">Use Case</a></li>
+                            <li><a href="contactus.html">Contact Us</a></li>
+                                                     
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="header">
+            <div class="container">  
+                <div class="row">
+                    <div class="span12">
+                        <h1>TotalADS: Total Anomaly Detection System</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container txt-lefty">			
+                <div class="row-fluid">
+                    <div class="span10">	
+                        <div class="entry">
+                            <div class="row-fluid">
+
+                                <p>  TotalADS is an Eclipse-based open source host based anomaly detection system to detect anomalies 
+                                    on a host using software execution traces or software logs. TotalADS allows to train different anomaly detection 
+                                    techniques (e.g., HMM, sequence matching,etc.) on offline traces or online trace stream, detect anomalies in 
+                                    new traces or trace stream, and visualize traces for forensic analysis.TotalADS can be used with different
+                                    of trace formats, such as CTF, XML and text formats, and new trace formats can also be easily added. TotalADS will 
+                                    soon be available for download in Eclipse Market place.
+                                </p><p>
+                                    TotalADS is actually based on <a href="http://lttng.org/eclipse" target="_blank">Tracing and Monitoring Framework (TMF)</a>,
+                                    a tracing platform developed by Ericsson.TMF provides different views for trace inspection and TotalADS enhanced TMF by providing automated anomaly 
+                                    detection in traces. TotalADS, including TMF, provides following views for trace inspection and automated 
+                                    anomaly detection:
+
+                                </p>
+
+                            </div>
+                        </div>
+
+
+                        <div class="entry">
+                            <h2>Modeling View</h2>
+                            <hr>
+                            <div class="row-fluid">
+
+                                <div class="span9">                
+                                    In the modeling view, an anomaly detection technique can be used to build a model of traces 
+                                    by training and validating itself on a set of existing traces. The modeling view also allows to adjust different
+                                    settings of the anomaly detection techniques. Three anomaly detection techniques are currently supported: 
+                                    Hidden Markov Model, Sequence Matching and Kernel State Modeling.                                 
+
+                                </div>
+                                <div class="span3">
+                                    <a id="img1" class="thumbnail" href="#" title="Modeling View" >
+                                        <img alt="image"  src="img/modeling.png">
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>  
+                        <div class="entry">
+                            <h2>Diagnosis View</h2>
+                            <hr>
+                            <div class="row-fluid">
+                                <div class="span9">                
+                                    This view tests an already built model on execution traces or software logs. It shows 
+                                    detailed results on each trace. Decision thresholds of models can also be adjusted in 
+                                    this view to decrease or increase the number of false alarms.
+
+                                </div>
+                                <div class="span3">
+                                    <a id="img1" class="thumbnail" href="#" title="Diagnosis View" >
+                                        <img alt="image"  src="img/diagnosis.png">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>  
+
+                        <div class="entry">
+                            <h2>Live Monitor View</h2>
+                            <hr>
+                            <div class="row-fluid">
+                                <div class="span9">                
+                                    This view allows to train and test models in real time by automatically collecting LTTng 
+                                    kernel space traces from a Linux system. It has two modes: (a) train and test mode, 
+                                    and (b) test mode. In the ‘train and test’ mode, a trace is collected from a remote system over 
+                                    SSH, tested on a model, and then the same trace is used for training. This mode should be used 
+                                    in a controlled environment when it is certain that all the system executions are normal 
+                                    (attack-free). Several models can be trained and tested simultaneously in this mode. 
+                                    In the live test mode (i.e., when the system is in operation), traces from real usage of the 
+                                    system are collected from a remote host and the models are evaluated on them.
+                                </div>
+                                <div class="span3">
+                                    <a id="img1" class="thumbnail" href="#" title="Live Monitor View" >
+                                        <img alt="image"  src="img/livemonitor.png">
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div> 
+                        <div class="entry">
+                            <h2>Events View</h2>
+                            <hr>
+                            <div class="row-fluid">
+                                <div class="span9">                
+                                When a model flags a trace as anomalous, an analyst may need to analyze it in detail. An individual
+                                trace can be analyzed in detail in this view. It shows all the events and their details in the 
+                                chronological order of their occurrences. For example, a system call and its arguments, 
+                                occurrences of page faults in memory, scheduling events, interrupt requests, etc. can be analyzed 
+                                in detail over here. 
+                                </div>
+                                <div class="span3">
+                                    <a id="img1" class="thumbnail" href="#" title="Events View" >
+                                        <img alt="image"  src="img/events.png">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry">
+                            <h2>Control Flow View</h2>
+                            <hr>
+                            <div class="row-fluid">
+                                <div class="span9">                
+                                This view is suitable for individual kernel space traces. It shows the states of different processes 
+                                in a system, their inter process communication, and the mode of execution. For example, a process can 
+                                be in wait-blocked state (shown as yellowish green 
+                                bar), in a user space state (shown as a green bar), in a kernel space (shown as blue bar), can be 
+                                waiting for CPU (shown as brown bar) and can be interrupted (shown as pink bar). Lines between bars 
+                                shows inter process communication.
+ 
+                                </div>
+                                <div class="span3">
+                                    <a id="img1" class="thumbnail" href="#" title="Control Flow View" >
+                                        <img alt="image"  src="img/controlflow.png">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry">
+                            <h2>Resource View</h2>
+                            <hr>
+                            <div class="row-fluid">
+                                <div class="span9">                
+                                This view is particularly useful if there are multiple CPUs in a system and it is suitable for 
+                                individual kernel space traces. In this view, utilization of CPUs, interrupts and other system 
+                                resources by processes can be observed with respect to time.  The color coding of processes is 
+                                the same as the Control Flow view.
+
+                                </div>
+                                <div class="span3">
+                                    <a id="img1" class="thumbnail" href="#" title="Resrouce View" >
+                                        <img alt="image"  src="img/resource.png">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry">
+                            <h2>Histogram View</h2>
+                            <hr>
+                            <div class="row-fluid">
+                                <div class="span9">                
+                                In this view frequency of events of a trace are plotted on a time line. This view is useful to 
+                                detect performance issues in a system. For example, if there are multiple CPUs in a system, 
+                                and the amount of load suddenly increases on them at some time, then this view can be used to 
+                                quickly see when this has happened. 
+                                </div>
+                                <div class="span3">
+                                    <a id="img1" class="thumbnail" href="#" title="Histogram View" >
+                                        <img alt="image"  src="img/histogram.png">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="entry">
+                            <h2>Other Views and Wizards</h2>
+                            <hr>
+                            <div class="row-fluid">
+                                              
+                               Several other views also exist. For example, statistics view shows the statistics (frequencies) of all
+                               the events in a trace and the properties view shows the details about the properties of a trace 
+                               (e.g., size, location, etc.).  New views can also be added by extending a Java interface. In addition,
+                               several wizards allows to parse text files using regular expressions, parse XML files, and create and 
+                               tune anomaly detection models.
+                             
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="span2">
+                        <h3>TotalADS</h3>
+                        <hr class="halfed">
+                        <div class="nav-collapse collapse">
+                        <ul class="nav pull-left animated">
+                            <li>  <a href="index.html" >Home</a></li>
+                            <li ><a href="features.html">Features</a></li>
+                            <li><a href="usecase.html">Use Case</a></li>
+                            <li><a href="contactus.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    </div>		  
+                </div>		
+            </div>
+        </div>
+
+        
+        <div id="copywrite">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <p>&copy; 2014 TotalADS <span id="totop" class="pull-right">Back to Top <i class="icon-arrow-up icon-white"></i></span></p>			
+                    </div>		  
+                </div>	  
+            </div>	  
+        </div>
+
+
+        <!-- Modal Window -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"  style="width:800px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h3 class="modal-title">Heading</h3>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <script src="js/jquery.fitvids.js"></script>
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/bounce.js"></script>	
+        <script>
+              (function(i, s, o, g, r, a, m) {
+                  i['GoogleAnalyticsObject'] = r;
+                  i[r] = i[r] || function() {
+                      (i[r].q = i[r].q || []).push(arguments)
+                  }, i[r].l = 1 * new Date();
+                  a = s.createElement(o),
+                          m = s.getElementsByTagName(o)[0];
+                  a.async = 1;
+                  a.src = g;
+                  m.parentNode.insertBefore(a, m)
+              })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+              ga('create', 'UA-42995003-2', 'debug007.com');
+              ga('send', 'pageview');
+
+        </script>
+        <script>
+            $('.thumbnail').click(function() {
+                $('.modal-body').empty();
+                var title = $(this).attr("title");
+                $('.modal-title').html(title);
+                $(this.innerHTML).appendTo('.modal-body');
+                $('#myModal').modal('show');
+            });
+        </script>
+
+    </body>
+</html>

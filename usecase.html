@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Total Anomaly Detection | Use Case</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Host based anomaly detection using software execution traces">
+        <meta name="keywords" content="anomaly detection, malware detection, performance failures, crash reports, system call traces,  
+              wp7 crash report analysis, log analysis">
+        <meta name="author" content="Syed Shariyar Murtaza">
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="css/glyphicons.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+        <link href="css/base.css" rel="stylesheet">
+        <link href="css/blue.css" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="ico/favicon.png">
+        <script src="js/google-ga-analytics.js"></script>
+
+    </head>  
+
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-primary btn-dropnav" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>		
+                    <a class="brand" href="/">TotalADS</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right animated">
+                            <li>  <a href="index.html" tabindex="-1">Home</a></li>
+                            <li ><a  href="features.html">Features</a></li>
+                            <li class="active"><a href="usecase.html">Use Case</a></li>
+                            <li><a href="contactus.html">Contact Us</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="header">
+            <div class="container">  
+                <div class="row">
+                    <div class="span12">
+                        <h1>TotalADS Use Case</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container txt-lefty">			
+                <div class="row-fluid">
+                    <div class="span10">	
+                        <div class="entry">
+                            <div class="row-fluid">
+                               
+                                <p> This use case discusses the experiments we performed on a Linux server using TotalADS.
+
+                                </p>
+
+                                <p>
+                                    We used an Ubuntu Linux server for our use case. We equipped
+                                    the server with Ubuntu Linux 12.04 operating system with
+                                    Apache 2.2.17 web server, PHP 5.3.5 server side scripting engine,
+                                    TikiWiki 8.1 content management system, FTP server, MySQL
+                                    distribution 5.1.56 (version 14.14) database management system
+                                    and an SSH server. These versions of the application software
+                                    systems were selected because of the well-known vulnerabilities.
+                                    To exploit these vulnerabilities in these software applications, we used an open source
+                                    penetration testing tool <a href="http://www.metasploit.com" target="_blank">Metasploit Framework (MSF)</a>.
+                                    We attacked the Linux server with Metasploit and monitored the server by using TotalADS.
+                                </p>
+                                <p>
+                                    The overall process of this use case is as follows. First, we used the Linux server as one would
+                                    use normally by executing different tasks, such as web serving, ssh access, execution of SQL
+                                    queries, word processing and FTP access. During the execution of these tasks, we used TotalADS to 
+                                    collect system call traces automatically from the server and train different anomaly detection algorithms, such
+                                    as HMM, Sequence Matching and Kernel State Modeling, on the system calls. Second,
+                                    we stopped training when the anomaly detection model became stable. Third, we continued the normal use
+                                    of the server and started monitoring the server using TotalADS in the testing mode. Fourth, we started
+                                    attacking the server from Metasploit and monitored anomalies from TotalADS
+                                 </p>
+                                 <p>
+                                    TotalADS raised alarms of anomalies during the execution of attacks, which we further diagnosed
+                                    by investigating the individual traces in views provided by TotalADS. This use case is discussed
+                                    in detail in the enclosed article: <a href="pdf/totalads_casestudy.pdf" target="_blank"> Download here </a>
+                                 </p>
+                                 <p>
+                                     TotalADs is not only useful in diagnosing security exploits but it can also diagnose performance
+                                     failures on a system in a similar manner as described earlier. It can also be used with logs in 
+                                     XMl format and logs in text format. 
+                                     
+                                 </p>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="span2">
+                        <h3>TotalADS</h3>
+                        <hr class="halfed">
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-left animated">
+                                <li>  <a href="index.html" >Home</a></li>
+                                <li ><a href="features.html">Features</a></li>
+                                <li><a href="usecase.html">Use Case</a></li>
+                                <li><a href="contactus.html">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>		  
+                </div>		
+            </div>
+        </div>
+
+
+        <div id="copywrite">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <p>&copy; 2014 TotalADS <span id="totop" class="pull-right">Back to Top <i class="icon-arrow-up icon-white"></i></span></p>			
+                    </div>		  
+                </div>	  
+            </div>	  
+        </div>
+
+
+        <!-- Modal Window -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"  style="width:800px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h3 class="modal-title">Heading</h3>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <script src="js/jquery.fitvids.js"></script>
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/bounce.js"></script>	
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-42995003-2', 'debug007.com');
+            ga('send', 'pageview');
+
+        </script>
+        <script>
+            $('.thumbnail').click(function() {
+                $('.modal-body').empty();
+                var title = $(this).attr("title");
+                $('.modal-title').html(title);
+                $(this.innerHTML).appendTo('.modal-body');
+                $('#myModal').modal('show');
+            });
+        </script>
+
+    </body>
+</html>
