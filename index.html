@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>		
-                    <a class="brand" href="/">TotalADS</a>
+                    <a class="brand" href="index.html">TotalADS</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right animated">
                             <li class="active">  <a href="index.html" tabindex="-1">Home</a></li>
@@ -69,12 +69,12 @@
                       <div class="span6">
                         <h2>TotalADS</h2>
                         <p style="text-align: justify">TotalADS is a novel framework for automated host-based anomaly detection. TotalADS is an open source tool 
-                            developed as a plugin to Eclipse. It integrates different anomaly detection techniques, different trace 
+                            developed as a plugin to Eclipse, it is open source and free. It integrates different anomaly detection techniques, different trace 
                             readers and a rich set of trace views in one common platform. It provides an interface to add new anomaly
                             detection techniques, the ability to add new readers for different types of trace formats, and the 
                             capability to add new views to visualize trace contents. TotalADS can also build and evaluate models from
                             anomaly detection techniques in real-time on live trace streams. Once an anomalous trace is detected, 
-                            it can then be analyzed in detail using TotalADS views,</p>	
+                            it can then be analyzed in detail using TotalADS views.</p>	
                     </div>
                     <div class="span6 txt-align">
                         <h2>Key Features</h2>
