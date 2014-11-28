@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Total Anomaly Detection | Documentation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Host based anomaly detection using software execution traces">
+        <meta name="keywords" content="anomaly detection, malware detection, performance failures, crash reports, system call traces,  
+              wp7 crash report analysis, log analysis">
+        <meta name="author" content="Syed Shariyar Murtaza">
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="css/glyphicons.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+        <link href="css/base.css" rel="stylesheet">
+        <link href="css/blue.css" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="ico/favicon.png">
+        <script src="js/google-ga-analytics.js"></script>
+
+    </head>  
+
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-primary btn-dropnav" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>		
+                    <a class="brand" href="index.html">TotalADS</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right animated">
+                            <li>  <a href="index.html" tabindex="-1">Home</a></li>
+                            <li ><a  href="features.html">Features</a></li>
+                            <li><a href="usecase.html">Use Case</a></li>
+                            <li class="active"><a href="documentation.html">Documentation</a></li>
+                            <li><a href="download.html">Download</a></li>
+                            <li><a href="contactus.html">Contact Us</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="header">
+            <div class="container">  
+                <div class="row">
+                    <div class="span12">
+                        <h1>TotalADS Documentation </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container txt-lefty">			
+                <div class="row-fluid">
+                    <div class="span10">	
+                        <div class="entry">
+                            <h2 id="offlineModeling"> User Guide: Offline Modeling and Anomaly Detection</h2>
+                            <div class="row-fluid">
+
+                                <p>  I assume that you already have the binary or source code of TotalADS, and you have started the executable file. If you haven't then you can compile the soruce code from the instruction on this site: 
+                                    <a href ="https://github.com/sshahriyar/org.eclipse.tracecompass/tree/develop/org.eclipse.tracecompass.totalads.core"
+                                       > TotalADS souce</a>
+                                </p>
+                                <p>Following steps show how to use TotalADS for anomaly detection: 
+                                </p>
+                                <ul>
+                                    <li> Open the TotalADS prespective by clicking on the menu:  Window -> Show Perspective.   
+                                    </li>
+                                    <li> Start MongoDB in your system or any another system. If you haven't setup MongoDB, then see above URL (for source cod compilation) on how to install MongoDB and run it in your system.
+                                    </li>
+                                    <li> Click on the icon with a tool tip "Connects to a database" in the Models DB view on the right side of TotalADS perspective.   
+                                    </li>
+                                    <li> This will pop up a Database Connection Wizard. Fill in the required information to connect to the MongoDB. You can connect either using an authentication mechanism or without any authentication mechanism to MongoDB based on your MongoDB's configuration.
+                                    </li>
+                                    <li> Once successfully connected to the database, click on the icon with a tooltip "Creates a new model" in the Model DB view. A new wizard will pop up. 
+                                    </li>
+                                    <li> Select an algorithm of your choice. Currently, there are three choices available: Sequence Matching (SQM) algorithm, Kernel State Modeling (KSM) algorithm, and Hidden Markov Model (HMM) algorithm. SQM extracts sequences (patterns) of events (e.g., function calls, system calls, etc.) of a given length from a set of training traces and then compare them against new unknwon traces to raise anomalous alarms on unknown patterns. KSM is suitable for only Linux operating system and applications running on it. KSM transforms system calls in traces into kernel modules, called states. It measures probabilities of modules' interactions and then compare them with the new traces to detect anomalous traces. HMM models the stochstic process hidden in the interaction of events in traces. For a given set of predefined states and the number of events, HMM calculates the observational probability of every event on every state and the transition probabilities from one state to another state from a sequence of events in training traces. It then measures the log-likelihood of a sequence of events of a given length from the validation traces and compares the log-likelihood against the sequence of events in unkown traces to raise anomalies.
+                                    </li>
+                                    <li>Click next to type the name of the model, and click next again to select the settings pertaining to the selected algorithm. The settings for SQM include the window size (sequence length), Hamming distance, and detailed analysis. If the detailed anlysis is set to false, then SQM will stop as soon as it finds out one anomlous sequence in the trace; otherwise, it will go through the whole trace and count all the anomalous sequences.
+                                    </li>
+                                    <li> Click finish to create a model. This creates a new model for a particular algorithm (or technique).
+                                    </li>
+                                    <li> The model created in the previous step is empty; i.e., it does not contain any data about logs or traces. Therefore, you need to build this model by training it on traces. 
+                                    </li>
+                                    <li>To train a model, click on the Modeling view (tab). Select the type of traces on which you want to build a model. The type of traces could be LTTng traces, a simple text file, your custom XML based type or your custom regular expression based type. In this section we shall only talk about LTTng trace type and a simple text file type.
+                                    </li>
+                                    <li> If you select an LTTng file, then the all the system calls from an LTTng trace will be extracted one by one as an event. If you select a simple text file, then every line in the text file will be extracted as one event. For example, if you have one function call per line then every function will be extracted as an event.
+                                    </li>
+                                    <li> Click on the Browse button for training traces and select the folder of the traces of your selected type. Note that you have to select a folder not an individual file. In the case of LTTng traces, one trace contains multiple files in one folder. In the case of text traces, you will have to put all your training (txt) files in one folder for training. Similarly click on the Browse button for validation traces and select the folder of validation traces.
+                                    </li>
+                                    <li>Select the model in Models DB view that you just created earlier and click on Start Modeling button in the Modeling view.
+                                    </li>
+                                    <li> TotalADS will now start training the selected model on the given traces. The details/output of the modeling can be seen in the console view in the bottom. You can maximize the console view by clicking on the maximize button.
+                                    </li>
+                                    <li> Note that every anomaly detection algorithm detects an anomaly in a trace by using a deicison threshold. If a new trace that is evaluated on the trained model yields a value greater than a certain known decision threshold, then the trace is anomalous; otherwise, it is considered by the algorithm as normal. During the process of training and validation, TotalADS automatically calculates the decision threshold based on validation traces for a trained model. It also shows the decision threshold values and the false alarm (positive) rate on the decision threshold values. TotalADS will try to identify on which decision threshold the false alarm rate becomes zero for validation traces.
+                                    </li>
+                                    <li> Also note that the performance of the anomaly detection algorithm depends on the decision threshold values and the coverage of the training traces. If your training traces covers all the functionalities exercise by a host/system/application, then the model built during training will represent complete behaviour of the system, else it will raise false alarms during testing on unseen normal data. If the traces do not cover all the functionality, then you can adjust decision threshold values to increase or decrease the level of false alarms. If the decision threshold value is set too high, then the number of false alarms will be negliglible but the anomalous behaviour might not be detected as well. However, if the decision threshold is set too low, then all the anomalous alarms are correctly detected but the number of false alrms might be too high too. Therefore, it is very important to have sufficient number of traces for training and the right decision threshold value set during validation.
+                                    </li>
+                                    <li>In case, you do not have complete trace data for a system, you can still start training a model and update the model as the new traces come in. However, it depends on the algorithm whether it supports incremntal training or not. For example, SQM and KSM supports incremental training and can be updated any time with new traces; whereas, HMM does not support incremental training. But HMM can be updated by retraining it on all the previous and new traces. Note that HMM can take extremely long on training large number of traces, it is better to use a sample of traces for training of HMM. You can then adjust decision thresholds manually after modeling is finished or by evaluating traces in the Diagnosis view (discussed below).
+                                    </li>
+                                    <li>To adjust decision thresholds, select a model on Model DB view and click on the icon with a tooltip "Adjust settings for testing". This will pop up a dialog box for the selected model where you can set a new value of the decision threshold. For example, in the case of SQM, the decision threshold is the Hamming distance. In the case of KSM, it is the alpha value, and in the case of HMM it is the log likelihood value. Every algorithm has its own decision threhsold.
+                                    </li>
+                                    <li> You can also train multiple models simultaneously on the same set of traces by selecting more tahn one model from the Models DB view.
+                                    </li>
+                                    <li> After building your models, the next thing you want to do is to use them to diagnose anomalies in unknown traces. Now go the Diagnosis view, select the type of these traces,  click Browse and select the folder of the traces. Select a model in the Models DB view or multiple models as per your requirements. Click Start Evaluation button. TotalADS will start testing models on the selected traces.
+                                    </li>
+                                    <li> The Console view in the bottom will show you the details/output of testing. The results view in the middle will show you the results for each trace according to each model. You can select the model name from the Select Models list and then select a trace in Trace List. If the selected trace is judged anomalous by the selected model, its details will be visible in the Details text box. For example SQM will show you the new sequence, KSM will show you the probabilities of occurences of Linux's kernel modules in traces, and HMM will show the seuqence with log-likelhood smaller than the known smallest log-likelihood.
+                                    </li>
+                                    <li> Select a different model from the Select Models list, select traces one by one to see if they are anomalous or not according to this model. If you find an anomaly in a trace based on one model, you can used another model to confirm whether it is an anomaly or not. Moreover, you can open that trace from the project explore view on the left to analyze the contents of the trace in detail, specially if it is an LTTng trace.
+                                    </li>
+                                    <li> To view the contents of the trace, right click in the Project Explorer window and Select New->Project and create a new Tracing project. Now click on the traces in Project Explorer View and select Import. This will pop up a new wizard. Select the type of trace if it is not automatically detected. If you have custom XML or text based types then you can not import them right now. You first have to create a parser for them. We shall discuss moore about parsers in another section. 
+                                    </li>
+                                    <li> If the trace is an LTTng kernel trace, then open the LTTng Kernel perspective from Window-> Show Perspective menu. (See http://lttng.org on how to collect LTTng traces.) Select the trace in Project explorer view, and you'll be able to see variety of views associated with the kernel trace. For example, you can see interprocess communication between processes using arrows and their different modes (e.g., user mode, kernel model, idel mode, etc.) in the Control Flow view. You can see details of the events, such as system calls with arguments, interrupts requests, page faults, scheduler events and etc. in the Events view. Simialrly there are many other views, such as Histogram view, Statistic view, Resources view and so on.
+                                    </li>
+                                    <li> You can use these rich views to explore the contents of the trace, especially the one predicted as anomalous by TotalADS and determine where did the anomaly occur in the trace.
+                                    </li>   
+                                </ul>
+
+
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="entry" >
+                            <h2 id="liveModeling">User Guide: Live Training and Anomaly Detection</h2>
+                            <hr>
+                            <div class="row-fluid">
+
+
+
+                                <p>TotalADS can be used to collect LTTng kernel traces from any Linux system, and train and test models on those traces in real time. Thus relieving you of the effort to collect traces. Here are the steps:
+                                </p>
+                                <ul> 
+                                    <li>Open TotalADS perspective and select Live Monitor view (tab).
+                                    </li>
+                                    <li> Install LTTng on a Linux machine where you want to perform Live Monitoring. Instructions to set up LTTng are available on this site: http://lttng.org/docs/. Once LTTng is installed, make sure you can collect LTTng traces without granting to root privileges to its commands (e.g., using sudo). If that is not the case, then add the user from which you will be collecting traces to a tracing group by using the following command: sudo usermod -aG tracing YOUR_USER.
+                                    </li>
+                                    <li>Enter SSH parameters for a machine to which you want TotalADS to connect and collect LTTng traces. SSH parameters include user name, password and port number. The user name here should be the one that has been added to the tracing group and can collect traces without root privileges.
+                                    </li>
+                                    <li>Select the snapshot duration. This is the duration to collect a trace on the remote system. 
+                                    </li>
+                                    <li> Select the snapshot interval. This interval tells TOtalADS how long should it wait before collecting a new trace. 
+                                    </li>
+                                    <li> Select the Evaluation Type: (a)Training and Testing or (b) Testing. When type (a) is selected TotalADS, will first download a trace from the remote system, test it on an existing model, display its results in the Live Results view, and then it will train the models on the same traces. When type (b) is selected, TotalADS will only test the trace on existing models, just like Diagnosis view, and display results in the Live Results view. Use type (a) when your system is in a controlled environment, and you know that everything is normal. Use type (b) when your system is operating in the wild, behaves in a wierd manner and you want to analyze what is wrong. You can also use type (b) for continuous monitoring but keep the interval between snapshots bigger to keep minimum overhead on the remote system.
+                                    </li>
+                                    <li> Click Browse to tell TotalADS the directory in which you would like to store traces that will be downloaded by TotalADS from the remote system. You can inspect these traces later if they are found anomalous by the models during Testing mode.
+                                    </li>
+                                    <li> Select the models from the Models DB view on the right. You can select more than one model. If you have not created any models yet then first connect to a MongoDB by clicking on the icon with tool tip "Connects to a database" and then clicking on the icon with a tool tip "Creates a new model". Note only those models can be slected during the type (a) mode which allows online training. For example SQM and KSM allows online training but HMM does not. In order to train HMM on traces from a remote machine you need to first downalod all the traces, go to the Modeling view and build an HMM model from those traces. In the type (b) mode any type of model can be selected.
+                                    </li>
+                                    <li>Click on Start button to start live monitroing. TotalADS will connect with the remote system (or your localhost) over SSH and display the details of processing in the Console view in the bottom. 
+                                    </li>
+                                    <li>The results will be displayed in the Live Results view. Timeline chart in the Live Results View will plot 1 or 0 in real time on the chart for each traces as the traces are downlaoded over a period of time. One will represent an anomaly and zero will represent a normal trace. The detailed resulted for each trace from each model can be viewed in the Details tab in the Live Reuslts view. In the details tab you can select a model and a trace to see the details of anomaly if any.
+                                    </li>
+                                    <li>You can stop monitoring by clicking on the Stop button in the Live Monitor view.
+                                    </li>
+                                    <li>If the models created are newly created models and you want them to be trained online on the trace of remote system, then these models will raise anomalous alarms on every new trace they receive for testing. This is because they have no information about the new system and everything is an anomaly to them. 
+                                    </li>
+                                    <li>During the time of  using type (a) mode (i.e., training and testing) you should perform all the normal operations on the remote system. Keep perofrming all the normal tasks just as you would use a system in regular operations, and continue to repeat the tasks. During this time you will start seeing pulses on the Timeline Chart. This means some traces are new and some are anomalous to the models and they are learning the behaviour of the remote system. 
+                                    </li>
+                                    <li> If you start seeing a straight line at 0 on Y-axis of the Timeline, then this means that the models have learnt the normal behaviour from the remote system and they do not see anything new in the traces. Everthing is now normal to them. If you do not see such a case and a considerable amount of time has passed despite being repeated activities on a remote system, then try increasing the descision threshold values for each of the models used in the Live Monitor mode one by one. You should start seeing a straight line plotted at 0 on Y-axis. Thus, at this point you can stop the training of the models in the Live Monitor mode. The models are now trained on the remote system.
+                                    </li>
+                                    <li> You can now put your system in operation in the wild, and use TotalADS in the test mode from the Live Monitor view with this remote system. These models will notify you whenever they find any trace anomalous. You can look at the details of anomalies for a trace form the Details tab of the Live Results view. Also you can inspect the contents of the trace by importing the trace from the project Explorer view and switching to LTTng perspective. In Lttng perspective you can look individual system calls and thier arguments, interprocess communication, histogram of all the events and statistics about the events.
+                                    </li>
+                                    <li> Thus, TotalADS can facilitate you in daignosing anomalies in your systems and saving your valuable time.
+                                    </li>
+                                </ul>
+
+
+
+                            </div>
+                        </div> 
+                        <!--- new  entry-->
+                        <div class="entry">
+                            <h2 id="customParsers">Custom XML and Text Readers </h2>
+                            <hr>
+                            <div class="row-fluid">
+
+                              <p>Usually the log files or trace files are in text format or XML format. These formats may vary for different organizations and systems. Fortunately you can parse custom XML formats and text formats without writing any code in TotalADS.
+                              </p>
+                              <ul>
+                                  <li>  Right click on the traces folder in the Project Explorer and click on Manage Custom Parsers.
+                                  </li>
+                                  <li> Select Text and click New in the dialog box that just appeared, if you want to parse traces or logs in text format. Select XML if you want to parse XML based file and click New.
+                                  </li>
+                              </ul>
+                              <br />
+                              <h3> Custom Text Parser </h3> 
+                              <ul>
+                                  <li> If you selected the Text parser, then in the wizard that just opened paste some of the lines from your text files in the preview input box.
+                                  </li>
+                                  <li> Type regular expression in the regular expression box. Automatically the groups will get highlighted in the preview input after you type regular expression. For each group that you have extracted by using a regular expression, give it a name in the Group box. For exampel for Group 1, select Other and give it a name. Similarly, if you have multiple groups, cick on new group and assign the group a name. If you have time stamp in the traces you can also type the time stamp format in the time stamp box and select the type of group as Time Stamp. Time Stamp is good for visualization of tracess in view belonging to Tracecompass. TotalADS doesnot need time stamp. You can leave it blank if you have none.
+                                  </li>
+                                  <li> Out of all the gorups you can select one group as the groups on which you can train models in TotalADs. Put * at the end of the name of the group. For example, if your group name is function, rename it to function*. TotalADS will use this field to extract function* events and train/test models on them.
+                                  </li>
+                                  <li> Enter the name of this trace type in the text box against Trace Type label. For example AbcType.
+                                  </li>
+                                  <li> Click next to see if you all the groups are extracted correctly, specially the one with *.
+                                  </li>
+                                  <li> Click Finish.
+                                  </li>
+                                  <li> Click Close.
+                                  </li>
+                                   <li>Now go to any view of TotalADS, you should be able to see your custom trace type parser. Select it and select the traces of this type to peroform modeling or diagnosis of anomalies in TotalADS.
+                                   </li>
+                              </ul>
+                              <br />
+
+                              <h3> Custom XML Parser </h3>
+                              <ul>  
+                               <li> If you selected the XML parser, then in the wizard that just opened paste one complete XML documentin the preview input box. Now click on a + icon with the a tool tip "I am feeling lucky". CUstom XML Parser wizard will detect all you elements in the XML document automatically.
+                               </li>
+                               <li> Suppose your XML file is in this format:
+                               </li>
+                               
+                               <div>
+                                     &lt a &gt
+                                       &lt b> General Messgae &lt/b>
+                                     &lt c> 
+                                         &lt d> event &lt /d>
+                                         &lt e> additional info </e>
+                                    &lt /c>
+                                   &lt /a>
+                               </div>
+
+                               <li> In this case, I m feeling lucky button will extract all the elements with the proper sturcture. Suppose the element of interest is &lt d >. Select the element d in the tree view on left and tick Log Entry on the right. Change Log Entry value to Other. This will enable the tag name field. The value in the tag name field would be d, just append * after it (similar to text parser). So the new field is d*.
+                               </li>
+                               <li> Now select the element &lt c >, and tick Log Entry but leave it as ignore. We have to select this  &lt c > element because it is the parent of  &lt d > but we are only interested in the value of  &lt d >. Therefore, we have ignore the value of  &lt c > but kept  &lt d > 's value.
+                               </li>
+                               <li>Give a name to this Trace type. For example, my-xml reader. You should be able to see all the child fields associated with  &lt c > and their values. We are only interested in d*, make sure its values is extracted. This d* field will be used by TotalADS to train/test models on the traces of type my-xml.
+                               </li>
+                               <li> Click Finish.
+                               </li>
+                               <li> Click Close.
+                               </li>
+                               <li> Now go to any view of TotalADS, you should be able to see your custom trace type parser in the trace type list. Select it and select the traces of this type to perform modeling or diagnosis of anomalies in TotalADS.
+                               </li>
+                               </ul>
+
+
+                            </div>
+                        </div>
+                        <!--- new  entry-->
+                        <div class="entry">
+                            <h2 id="developerGuide"> Developer Guide: Adding New Algorithms and Trace Types</h2>
+                            <hr>
+                            <div class="row-fluid">
+
+                                <p>  Before reading this guide it is important that you should read above user guides.
+                                    If you want to add a new anomaly detection algorithm or a trace reader for a new trace type, then clone and compile the source code as mentioned on the <a href="https://github.com/sshahriyar/org.eclipse.tracecompass/tree/develop/org.eclipse.tracecompass.totalads.core">TotalADS setup page. </a> 
+                                </p>
+                                <br />
+                                <h3> Adding an algorithm </h4>
+                                <ul>
+                                <li> Go to the org.eclipse.tracecompass.totalads.core plugin, and expand the src folder. This plugin, contains the core functionalities of TotalADS. To create a new xyz algorithm, right click on the src folder and click New->Package. Create a package org.eclipse.totalads.algorithms.xyzalgorithm. 
+                                </li>   
+                                <li> Select the xyzalgorithm package, right click on it to create a new class: XyzAlgorithm. This class should implement the IDetectionAlgorithm interface. Implement each of the function provided by the IDetectionAlgorithm interface. 
+                                </li>
+                                <li>Implement another static function: public static void registerAlgorithm() throws TotalADSGeneralException. In this function you should provide a code to register your algorithm with AlgorithmFactory class.
+                                </li>
+                                 <li>There are three examples of algorithms in this plugin. You can look at them to have an idea of implementation of the functions. These algorithms are in packages: org.eclipse.tracecompass.totalads.algorithms.ksm, org.....sequencematching, and org......hiddenmarkovmodel.
+                                 </li>
+                                 <li> Note that in the initializeModelAndSettings function, you need to create a new model (i.e., a database) in MongoDB. The collections (tables) of this database should also be created in this function by your algorithm. It would be better to create  an enum type for every collection and its assoicated fields in your xyzalgorithm package. This way you don't have to type the names of your collections and fields everywhere in the code and you can acces them from one common place. Also this would be helpful in maintenance of the collections and its fields in future. See examples of other algorithms already implemented.
+                                 </li>
+                                 <li> Now go to AlgorithmFactory class and type this in the initialize function: XyzAlgorithm.registerAglorithm().
+                                 </li>
+                                 <li> Right click on totalads.core component and run it as an eclipse application. You should be able to test your new algorithm.
+                                 </li>
+                                 <li> After implementing your algorithm, make sure that your algorithm works without errors by running the AlgorithmUtilityTest class in the totalads.core.tests plugin. Right click on this class and run as JUnit Test. All the tests should pass.
+                                 </li>
+                                </ul>
+                                <br />
+                                
+                                <h3>Adding a trace reader </h3>
+                                <ul>
+                                  <li>To add a new trace reader for abc trace type, right click on the src folder and click New->Package. Create a package org.eclipse.totalads.readers.abcreader. 
+                                  </li>
+                                   <li>Select the abcreader package, right click on it to create a new class: AbcReader. This class should implement the ITraceTypeReader interface. Implement each of the function provided by the ITraceTypeReader interface. 
+                                   </li>
+                                   <li> Implement another static function: public static void registerTraceTypeReader() throws TotalADSGeneralException. In this function you should provide a code to register your reader with TraceTypeFactory class.
+                                   </li>
+                                    <li>Again select the abcreader package, right click on it to create a new class AbcTraceIterator. This class should implement the interface ITraceIterator. Implement all the functions of this interface in this class. This iterator will actually iterate over a trace of abc type and it will be called by algorithms. When its advance function is called it should move to the next event, parse it if necessary, and return true or false. If the return value is true the algorithm will then call the function getCurrentEvent() to get the parsed event during the call of advance function. The purpose of trace iterator is that the whole trace should not get loaded into memory at once but only the events that are required.
+                                    </li>
+                                    <li> There are four examples of readers in this plugin. You can look at them to have an idea of implementation of the functions. These readers are in packages: org.eclipse.tracecompass.totalads.readers.ctfreaders, org.....textreaders, and org......tmfreaders. Tmfreaders contain two two examples of custom readers: CustomTmfTextReader and CustomTmfXmlReader. The simplest example is the TextLineTraceReader class in textreaders package.
+                                    </li>
+                                    <li> Now go to TraceTypeFactory class and type this in the initialize function: AbcReader.registerTraceTypeReader();
+                                    </li>
+                                    <li> Right click on totalads.core component and run it as an eclipse application. You should be able to test your new reader.
+                                    </li>
+                                    <li> After implementing your algorithm, make sure that your reader works without errors by adding a new JUnit test case testTrainValidateAndTestModelsForAbcTraces() in the AlgorithmUtilityTest class in the totalads.core.tests plugin. See other similar functions in the same class on how to implement this test case.
+                                    </li>
+                                    </ul>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>   
+                    <div class="span2">
+                        <h3>TotalADS</h3>
+                        <hr class="halfed">
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-left animated">
+                                <li>  <a href="#offlineModeling" >Offline Modeling</a></li>
+                                <li ><a href="#liveModeling">Live Modeling</a></li>
+                                <li><a href="#customParsers">Custom Parsers</a></li>
+                                <li><a href="#developerGuide">Developer Guide</a></li>
+                            </ul>
+                        </div>
+                    </div>		  
+                </div>		
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <div id="copywrite">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <p>&copy; 2014 TotalADS <span id="totop" class="pull-right">Back to Top <i class="icon-arrow-up icon-white"></i></span></p>			
+                    </div>		  
+                </div>	  
+            </div>	  
+        </div>
+
+
+        <!-- Modal Window -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"  style="width:800px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+                <h3 class="modal-title">Heading</h3>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <script src="js/jquery.fitvids.js"></script>
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/bounce.js"></script>	
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-42995003-2', 'debug007.com');
+            ga('send', 'pageview');
+
+        </script>
+        <script>
+            $('.thumbnail').click(function() {
+                $('.modal-body').empty();
+                var title = $(this).attr("title");
+                $('.modal-title').html(title);
+                $(this.innerHTML).appendTo('.modal-body');
+                $('#myModal').modal('show');
+            });
+        </script>
+
+    </body>
+</html>

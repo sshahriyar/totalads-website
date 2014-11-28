@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Total Anomaly Detection | Use Case</title>
+        <title>Total Anomaly Detection | Download</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Host based anomaly detection using software execution traces">
         <meta name="keywords" content="anomaly detection, malware detection, performance failures, crash reports, system call traces,  
@@ -44,10 +44,10 @@
                         <ul class="nav pull-right animated">
                             <li>  <a href="index.html" tabindex="-1">Home</a></li>
                             <li ><a  href="features.html">Features</a></li>
-                            <li class="active"><a href="usecase.html">Use Case</a></li>
-                             <li><a href="documentation.html">Documentation</a></li>
-                            <li><a href="download.html">Download</a></li>
-                              <li><a href="contactus.html">Contact Us</a></li>
+                            <li><a href="usecase.html">Use Case</a></li>
+                            <li><a href="documentation.html">Documentation</a></li>
+                            <li class="active"><a href="download.html">Download</a></li>
+                            <li><a href="contactus.html">Contact Us</a></li>
 
                         </ul>
                     </div>
@@ -59,7 +59,7 @@
             <div class="container">  
                 <div class="row">
                     <div class="span12">
-                        <h1>TotalADS Use Case</h1>
+                        <h1>Download TotalADS</h1>
                     </div>
                 </div>
             </div>
@@ -72,51 +72,22 @@
                         <div class="entry">
                             <div class="row-fluid">
                                
-                                <p> This use case discusses the experiments we performed on a Linux server using TotalADS.
-
+                                <p> To compile and run the source code go to the following URL and follow the instructions: 
+                                    <a target="_blank" href="https://github.com/sshahriyar/org.eclipse.tracecompass/tree/develop/org.eclipse.tracecompass.totalads.core">
+                                        TotalADS source code.
+                                    </a>
                                 </p>
-
-                                <p>
-                                    We used an Ubuntu Linux server for our use case. We equipped
-                                    the server with Ubuntu Linux 12.04 operating system with
-                                    Apache 2.2.17 web server, PHP 5.3.5 server side scripting engine,
-                                    TikiWiki 8.1 content management system, FTP server, MySQL
-                                    distribution 5.1.56 (version 14.14) database management system
-                                    and an SSH server. These versions of the application software
-                                    systems were selected because of the well-known vulnerabilities.
-                                    To exploit these vulnerabilities in these software applications, we used an open source
-                                    penetration testing tool <a href="http://www.metasploit.com" target="_blank">Metasploit Framework (MSF)</a>.
-                                    We attacked the Linux server with Metasploit and monitored the server by using TotalADS.
-                                </p>
-                                <p>
-                                    The overall process of this use case is as follows. First, we used the Linux server as one would
-                                    use normally by executing different tasks, such as web serving, ssh access, execution of SQL
-                                    queries, word processing and FTP access. During the execution of these tasks, we used TotalADS to 
-                                    collect system call traces automatically from the server and train different anomaly detection algorithms, such
-                                    as HMM, Sequence Matching and Kernel State Modeling, on the system calls. Second,
-                                    we stopped training when the anomaly detection model became stable. Third, we continued the normal use
-                                    of the server and started monitoring the server using TotalADS in the testing mode. Fourth, we started
-                                    attacking the server from Metasploit and monitored anomalies from TotalADS
-                                 </p>
-                                 <p>
-                                    TotalADS raised alarms of anomalies during the execution of attacks, which we further diagnosed
-                                    by investigating the individual traces in views provided by TotalADS. This use case is discussed
-                                    in detail in the enclosed article: <a href="pdf/totalads_casestudy.pdf" target="_blank"> download here </a>
-                                 </p>
-                                 <p>
-                                     TotalADs is not only useful in diagnosing security exploits but it can also diagnose performance
-                                     failures on a system in a similar manner as described earlier. It can also be used with logs in 
-                                     XMl format and logs in text format. 
-                                     
-                                 </p>
-
+                                <p> To download the executable (binary) file related to your operating system, follow this URL:
+                                    <a target="_blank" href="https://github.com/sshahriyar/org.eclipse.tracecompass/releases/tag/0.1.0"> 
+                                        TotalADS binary distribution.
+                                    </a>
                             </div>
                         </div>
 
 
 
                     </div>
-                 	  
+                    		  
                 </div>		
             </div>
         </div>

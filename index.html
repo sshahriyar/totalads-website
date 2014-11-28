@@ -42,6 +42,8 @@
                             <li class="active">  <a href="index.html" tabindex="-1">Home</a></li>
                             <li ><a  href="features.html">Features</a></li>
                             <li><a href="usecase.html">Use Case</a></li>
+                            <li><a href="documentation.html">Documentation</a></li>
+                            <li><a href="download.html">Download</a></li>
                             <li><a href="contactus.html">Contact Us</a></li>
                                                      
                         </ul>
@@ -68,13 +70,13 @@
                 <div class="row">
                       <div class="span6">
                         <h2>TotalADS</h2>
-                        <p style="text-align: justify">TotalADS is a novel framework for automated host-based anomaly detection. TotalADS is an open source tool 
-                            developed as a plugin to Eclipse, it is open source and free. It integrates different anomaly detection techniques, different trace 
-                            readers and a rich set of trace views in one common platform. It provides an interface to add new anomaly
-                            detection techniques, the ability to add new readers for different types of trace formats, and the 
-                            capability to add new views to visualize trace contents. TotalADS can also build and evaluate models from
-                            anomaly detection techniques in real-time on live trace streams. Once an anomalous trace is detected, 
-                            it can then be analyzed in detail using TotalADS views.</p>	
+                        <p style="text-align: justify">TotalADS is a novel framework for automated host-based anomaly detection. TotalADS is an open source tool developed as a plug-in for Eclipse. It integrates different anomaly detection algorithms (or techniques), different trace readers and a rich set of trace views in one common platform.
+
+Currently, TotalADS encompasses three different algorithms, such as Sequence Matching (SQM), Kernel State Modeling (KSM), and Hidden Markov Model (HMM). It supports execution traces and logs in CTF, XML and text format. It also supports live anomaly detection using trace streaming along with real time training and testing.
+
+TotalADS also extends another Eclipse plugin called Trace Compass by using the rich set of views present in it for the visualization of traces, such as control flow of processes,resource usages and etc.
+
+TotalADS has a number of applications, such as automatic detection of zero day attacks, diagnosis of anomalous paths in failure traces, and diagnosis of performance faults in the system. TotalADS is extendible through simple Java interfaces: new algorithms and trace readers can be easily added.</p>	
                     </div>
                     <div class="span6 txt-align">
                         <h2>Key Features</h2>
